@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
+import client from './Client'
 import './App.css';
+import { ClientContext } from 'graphql-hooks';
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 
-function App() {
+function Main() {
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +23,19 @@ function App() {
         </a>
       </header>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <ClientContext.Provider value={client}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/app" component={Main} />
+          <Redirect to="/app" />
+        </Switch>
+      </BrowserRouter>
+    </ClientContext.Provider>
   );
 }
 
